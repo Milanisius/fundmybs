@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+var config = require('./config');
+
 const express = require('express');
 const app = express();
 
@@ -14,16 +18,14 @@ const client = new Client({
 client.connect();
 
 
-app.get('/projectsQuery', (req, res) => {
+app.get('/api/projectsQuery', (req, res) => {
 
-    client.query('SELECT * FROM projects LIMIT 100;')
+    client.query('SELECT projects.id, projects.name, projects.description, projects.video, projects.current, projects.goal, projects.creationtime, users.username, users.picture  FROM projects, users WHERE users.id=projects.owner LIMIT 100;')
     .then(queryRes => {
-        console.log(queryRes);
-        res.send(queryResult.json);
+        console.log(queryRes.rows);
+        res.send(queryRes.rows);
     })
     .catch(e => console.error(e.stack))
-
-    res.send('FAIL');
 
     });
 
