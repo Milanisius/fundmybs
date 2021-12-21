@@ -1,0 +1,23 @@
+CREATE TABLE projects (
+  id              SERIAL PRIMARY KEY,
+  owner           INTEGER,
+  name            TEXT,
+  description     TEXT,
+  video           TEXT,
+  current         NUMERIC(10, 2),
+  goal            NUMERIC(10, 2),
+  creationTime TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE TABLE users (
+  id              SERIAL PRIMARY KEY,
+  username        VARCHAR(30) NOT NULL UNIQUE,
+  email           VARCHAR(320) NOT NULL UNIQUE,
+  password        CHAR(60) NOT NULL,
+  creationTime TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE TABLE backs (
+  projectid       INTEGER PRIMARY KEY,
+  userid          INTEGER PRIMARY KEY,
+  amount          NUMERIC(10, 2) NOT NULL,
+  creationTime TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
