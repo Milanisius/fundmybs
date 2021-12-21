@@ -5,7 +5,6 @@ import './App.css';
 
 function App() {
 
-
   const [projects, setProjects] = useState(["fwgf", "fgaeg"]);
 
   useEffect(() => {
@@ -13,9 +12,10 @@ function App() {
   }, []);
 
   const getProjects = async () => {
-    const response = await fetch("/hey");
+    const response = await fetch("/projectsQuery");
     const data = await response.json();
     console.log(data);
+    setProjects(data);
   }
 
   return (
@@ -26,7 +26,6 @@ function App() {
       ))}
     </div>
   );
-
 }
 
 export default App;

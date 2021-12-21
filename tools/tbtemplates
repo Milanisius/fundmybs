@@ -13,11 +13,14 @@ CREATE TABLE users (
   username        VARCHAR(30) NOT NULL UNIQUE,
   email           VARCHAR(320) NOT NULL UNIQUE,
   password        CHAR(60) NOT NULL,
+  description     TEXT,
+  picture         TEXT,
   creationTime TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 CREATE TABLE backs (
-  projectid       INTEGER PRIMARY KEY,
-  userid          INTEGER PRIMARY KEY,
+  id              SERIAL PRIMARY KEY,
+  projectid       INTEGER NOT NULL,
+  userid          INTEGER NOT NULL,
   amount          NUMERIC(10, 2) NOT NULL,
   creationTime TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
